@@ -4,6 +4,22 @@ window.onload = function() {
 
   var searchForm = document.getElementById("search");
   var hashtag = document.getElementById("hashtag");
+  var template = document.getElementById("template");
+
+  var showImages = function (data) {
+    console.log("Data", data);
+    for (var i = 0; i < data.length; i++) {
+      var node = document.createElement("div");
+      var img = document.createElement("img");
+      img.src = data[i].images.thumbnail.url;
+      var text = document.createTextNode(data[i].caption.text);
+      console.log(text);
+      node.appendChild(img);
+      node.appendChild(text);
+      template.appendChild(node);
+
+    }
+  }
 
   searchForm.addEventListener("submit", function (event) {
     // prevent page from reloading
@@ -17,7 +33,7 @@ window.onload = function() {
       var that = {};
 
       that.send = function (src, options) {
-        var callback_name = options.callbackName || 'callback',
+        var callback_name = options.callbackName || "callback",
           on_success = options.onSuccess || function () {},
           on_timeout = options.onTimeout || function () {},
           timeout = options.timeout || 10; // sec
@@ -32,12 +48,12 @@ window.onload = function() {
           on_success(data);
         }
 
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
+        var script = document.createElement("script");
+        script.type = "text/javascript";
         script.async = true;
         script.src = src;
 
-        document.getElementsByTagName('head')[0].appendChild(script);
+        document.getElementsByTagName("head")[0].appendChild(script);
       }
 
       return that;
@@ -45,18 +61,20 @@ window.onload = function() {
 
   $jsonp.send("https://api.instagram.com/v1/tags/" + hashtag.value + "/media/recent?client_id=24a3a1bf127447d1aae07a6a7c4ef990&callback=callbackFunction", {
       callbackName: "callbackFunction",
-      onSuccess: function (data) {
-        console.log('success!', data);
-        var data = JSON.parse(data);
+      onSuccess: function (json) {
+        console.log("success!", json);
+        showImages(json.data);
       },
       onTimeout: function () {
-        console.log('timeout!');
+        console.log("timeout!");
       },
       timeout: 5
   });
 
-    // reset form to be blank
-    hashtag.value = "";
+  // reset form to be blank
+  hashtag.value = "";
+
+
   });
 
 };
