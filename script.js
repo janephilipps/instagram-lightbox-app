@@ -9,14 +9,17 @@ window.onload = function() {
   var showImages = function (data) {
     console.log("Data", data);
     for (var i = 0; i < data.length; i++) {
-      var node = document.createElement("div");
+      var image = document.createElement("div");
+      image.className = "image";
+      var p = document.createElement("p");
       var img = document.createElement("img");
-      img.src = data[i].images.thumbnail.url;
+      img.src = data[i].images.low_resolution.url;
       var text = document.createTextNode(data[i].caption.text);
       console.log(text);
-      node.appendChild(img);
-      node.appendChild(text);
-      template.appendChild(node);
+      p.appendChild(text);
+      image.appendChild(img);
+      image.appendChild(p)
+      template.appendChild(image);
 
     }
   }
