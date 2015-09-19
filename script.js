@@ -3,9 +3,12 @@ window.onload = function() {
   // console.log("loaded!");
 
   var form = document.getElementById("search");
+  var hashtag = document.getElementById("hashtag");
 
-  form.addEventListener("submit", function () {
-    // alert("submitted!");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log(hashtag.value);
+    hashtag.value = "";
   });
 
   var $jsonp = (function () {
