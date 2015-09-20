@@ -9,7 +9,7 @@ window.onload = function() {
   var images = template.childNodes;
 
 
-
+  // Function to create a template for each image from API
   var showImages = function (data) {
     // console.log("Data", data);
     for (var i = 0; i < data.length; i++) {
@@ -31,30 +31,82 @@ window.onload = function() {
       template.appendChild(imageContainer);
 
     }
-  }
+  };
+
+  // Function to add create lightbox
+
+  var addLightbox = function (index) {
+
+    var image = images[index];
+    // console.log(image);
+    // Make a copy of the image that was clicked on
+    var clone = image.cloneNode(true);
+    // Add X to clone
+    var closeIcon = document.createElement("div");
+    closeIcon.className = "closeIcon";
+    closeIcon.innerHTML = "X";
+    // Append closeIcon to image clone
+    clone.appendChild(closeIcon);
+    // Add the cloned image as a child of the document body
+    document.body.appendChild(clone);
+    // Add a new class to the clone
+    clone.className = clone.className + " white_content";
+    // Add a new class to the container
+    container.className = "black_overlay";
+    // Set the id of the clone
+    clone.setAttribute("id", "light");
+    // Change styles of clone and container elements to allow for lightbox
+    document.getElementById("light").style.display='block';
+    document.getElementById("container").style.display='block';
+  };
+
+  // Function to listen for clicks to make lightbox pop up
 
   var listenForClicks = function () {
-    // for (var i = 0; i < images.length; i++) {
-    //   images[i].addEventListener("click", function (event) {
-    //     alert("This is image " + i);
-    //   })
-    // }
 
-    var imageOne = images[0];
+    for (var i = 0; i < images.length; i++) {
 
-    imageOne.addEventListener("click", function (event) {
-      // alert("This is image 1!");
-      console.log(imageOne);
-      var clone = imageOne.cloneNode(true);
-      document.body.appendChild(clone);
-      clone.className = clone.className + " white_content";
-      container.className = "black_overlay";
-      clone.setAttribute("id", "light");
-      document.getElementById("light").style.display='block';
-      document.getElementById("container").style.display='block';
+      var addEventListener = function (index) {
+        images[i].addEventListener("click", function (event) {
+          // alert("This is image " + index);
+          addLightbox(index);
+        })
+      }
 
-    })
-  }
+      addEventListener(i);
+    }
+  };
+
+    // Add lightbox functionality to first image
+    // var imageOne = images[0];
+
+    // imageOne.addEventListener("click", function (event) {
+    //   // alert("This is image 1!");
+    //   console.log(imageOne);
+    //   var clone = imageOne.cloneNode(true);
+    //   document.body.appendChild(clone);
+    //   clone.className = clone.className + " white_content";
+    //   container.className = "black_overlay";
+    //   clone.setAttribute("id", "light");
+    //   document.getElementById("light").style.display='block';
+    //   document.getElementById("container").style.display='block';
+
+    // })
+
+    // container.addEventListener("click", function (event) {
+    //   if (container.className === "black_overlay") {
+    //     console.log("lightbox in action!");
+    //     // remove clone
+    //     var clone = document.getElementById("light");
+    //     // document.body.removeChild(clone)
+
+    //     // remove black_overlay class from container
+    //     // container.className = "";
+
+    //   }
+    // })
+
+  // }
 
 
   searchForm.addEventListener("submit", function (event) {
