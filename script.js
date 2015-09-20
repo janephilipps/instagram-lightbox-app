@@ -58,6 +58,12 @@ window.onload = function() {
     // Change styles of clone and container elements to allow for lightbox
     document.getElementById("light").style.display='block';
     document.getElementById("container").style.display='block';
+
+    closeIcon.addEventListener("click", function (event) {
+      // alert("hi!");
+      document.body.removeChild(clone);
+      container.className = "";
+    });
   };
 
   // Function to listen for clicks to make lightbox pop up
