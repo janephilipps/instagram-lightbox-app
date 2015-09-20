@@ -41,6 +41,9 @@ window.onload = function() {
     // console.log(image);
     // Make a copy of the image that was clicked on
     var clone = image.cloneNode(true);
+    // Remove hr from clone
+    var hr = clone.lastChild;
+    clone.removeChild(hr);
     // Add X to clone
     var closeIcon = document.createElement("div");
     closeIcon.className = "closeIcon";

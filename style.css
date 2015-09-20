@@ -56,15 +56,16 @@ p {
 .white_content {
   display: none;
   position: fixed;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 50%;
+  top: 20%;
+  left: 32.5%;
+  width: 30%;
+  height: 60%;
   padding: 16px;
   border: 5px solid grey;
   background-color: white;
   z-index:1002;
   overflow: auto;
+  text-align: center;
 }
 
 .closeIcon {
