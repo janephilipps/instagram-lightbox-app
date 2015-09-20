@@ -5,9 +5,15 @@ window.onload = function() {
   var searchForm = document.getElementById("search");
   var hashtag = document.getElementById("hashtag");
   var template = document.getElementById("template");
+  var container = document.getElementById("container");
+  // var body = document.getElementsByTagName("body");
+
+  var images = template.childNodes;
+
+
 
   var showImages = function (data) {
-    console.log("Data", data);
+    // console.log("Data", data);
     for (var i = 0; i < data.length; i++) {
       var image = document.createElement("div");
       image.className = "image";
@@ -15,7 +21,7 @@ window.onload = function() {
       var img = document.createElement("img");
       img.src = data[i].images.low_resolution.url;
       var text = document.createTextNode(data[i].caption.text);
-      console.log(text);
+      // console.log(text);
       p.appendChild(text);
       image.appendChild(img);
       image.appendChild(p)
@@ -24,12 +30,36 @@ window.onload = function() {
     }
   }
 
+  var listenForClicks = function () {
+    // for (var i = 0; i < images.length; i++) {
+    //   images[i].addEventListener("click", function (event) {
+    //     alert("This is image " + i);
+    //   })
+    // }
+
+    var imageOne = images[0];
+
+    imageOne.addEventListener("click", function (event) {
+      // alert("This is image 1!");
+      console.log(imageOne);
+      var clone = imageOne.cloneNode(true);
+      document.body.appendChild(clone);
+      clone.className = clone.className + " white_content";
+      container.className = "black_overlay";
+      clone.setAttribute("id", "light");
+      document.getElementById("light").style.display='block';
+      document.getElementById("container").style.display='block';
+
+    })
+  }
+
+
   searchForm.addEventListener("submit", function (event) {
     // prevent page from reloading
     event.preventDefault();
 
     // log hashtag value
-    console.log(hashtag.value);
+    // console.log(hashtag.value);
 
     // execute JSONP API call with hashtag
     var $jsonp = (function () {
@@ -65,8 +95,9 @@ window.onload = function() {
   $jsonp.send("https://api.instagram.com/v1/tags/" + hashtag.value + "/media/recent?client_id=24a3a1bf127447d1aae07a6a7c4ef990&callback=callbackFunction", {
       callbackName: "callbackFunction",
       onSuccess: function (json) {
-        console.log("success!", json);
+        // console.log("success!", json);
         showImages(json.data);
+        listenForClicks();
       },
       onTimeout: function () {
         console.log("timeout!");
