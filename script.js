@@ -6,8 +6,6 @@ window.onload = function() {
   var hashtag = document.getElementById("hashtag");
   var template = document.getElementById("template");
   var container = document.getElementById("container");
-  // var body = document.getElementsByTagName("body");
-
   var images = template.childNodes;
 
 
@@ -15,17 +13,22 @@ window.onload = function() {
   var showImages = function (data) {
     // console.log("Data", data);
     for (var i = 0; i < data.length; i++) {
+      var imageContainer = document.createElement("div");
+      imageContainer.className = "imageContainer";
       var image = document.createElement("div");
       image.className = "image";
       var p = document.createElement("p");
       var img = document.createElement("img");
       img.src = data[i].images.low_resolution.url;
       var text = document.createTextNode(data[i].caption.text);
+      var hr = document.createElement("hr");
       // console.log(text);
       p.appendChild(text);
       image.appendChild(img);
-      image.appendChild(p)
-      template.appendChild(image);
+      image.appendChild(p);
+      imageContainer.appendChild(image);
+      imageContainer.appendChild(hr);
+      template.appendChild(imageContainer);
 
     }
   }

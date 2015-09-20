@@ -17,20 +17,23 @@ input[type=submit] {
 }
 
 form {
-  margin-left: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
-#template {
-  margin-left: 15px;
+#container {
+  text-align: center;
 }
 
 .image {
-  margin-top: 15px;
-  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  width: 320px;
 }
 
 p {
+  font-family: Helvetica, sans-serif;
   font-size: 16px;
 }
 
@@ -39,15 +42,15 @@ p {
 .black_overlay {
   display: none;
   position: absolute;
-  top: 0%;
-  left: 0%;
+  top: 8px;
+  left: 8px;
   width: 100%;
   height: 100%;
-  background-color: black;
+  /*background-color: black;*/
   z-index:1001;
-  -moz-opacity: 0.8;
-  opacity:.80;
-  filter: alpha(opacity=80);
+  -moz-opacity: 0.5;
+  opacity:.50;
+  filter: alpha(opacity=50);
 }
 
 .white_content {
@@ -58,7 +61,7 @@ p {
   width: 50%;
   height: 50%;
   padding: 16px;
-  border: 5px solid black;
+  border: 5px solid grey;
   background-color: white;
   z-index:1002;
   overflow: auto;
