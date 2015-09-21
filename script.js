@@ -138,15 +138,16 @@ window.onload = function () {
     // log hashtag value
     console.log("HASHTAG: " + hashtag.value);
 
+
+    // If there are images from a previous search, remove them
     if (images.length > 0) {
       console.log("TEMPLATE IS: " + typeof template);
       console.log("images is: " + typeof images);
       console.log(images);
       console.log("images[0] is: " + typeof images[0]);
       // Delete existing images from DOM
-      for (var i = 0; i < images.length; i++) {
-        console.log("images[i] is: " + typeof images[i]);
-        template.removeChild(images[i]);
+      while (template.firstChild) {
+        template.removeChild(template.firstChild);
       }
     }
 
