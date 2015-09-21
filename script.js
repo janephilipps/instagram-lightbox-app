@@ -50,6 +50,16 @@ window.onload = function() {
     closeIcon.innerHTML = "X";
     // Append closeIcon to image clone
     clone.appendChild(closeIcon);
+    // Add left & right arrows
+    var left = document.createElement("div");
+    left.className = "left";
+    left.innerHTML = "<";
+    var right = document.createElement("div");
+    right.className = "right";
+    right.innerHTML = ">";
+    // Append left & right to image clone
+    clone.appendChild(left);
+    clone.appendChild(right);
     // Add the cloned image as a child of the document body
     document.body.appendChild(clone);
     // Add a new class to the clone

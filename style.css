@@ -79,3 +79,27 @@ p {
   border-radius: 100%;
   background-color: white;
 }
+
+.left {
+  position: absolute;
+  text-align: center;
+  left: 0px;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid grey;
+  border-radius: 100%;
+  background-color: white;
+}
+
+.right {
+  position: absolute;
+  text-align: center;
+  right: 0px;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid grey;
+  border-radius: 100%;
+  background-color: white;
+}
