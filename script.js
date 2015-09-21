@@ -32,6 +32,8 @@ window.onload = function () {
       imageContainer.appendChild(hr);
       template.appendChild(imageContainer);
 
+      images = template.childNodes;
+
     }
   };
 
@@ -116,11 +118,11 @@ window.onload = function () {
 
   // Function to listen for clicks to make lightbox pop up
   var listenForClicks = function () {
-    console.log(images);
+    // console.log(images[0].firstChild.lastChild.innerHTML);
     for (var i = 0; i < images.length; i++) {
 
       var addEventListener = function (index) {
-        images[i].firstChild.addEventListener("click", function (event) {
+        images[index].firstChild.addEventListener("click", function (event) {
           // alert("This is image " + index);
           showLightbox(index);
         })
@@ -134,7 +136,19 @@ window.onload = function () {
     event.preventDefault();
 
     // log hashtag value
-    console.log(hashtag.value);
+    console.log("HASHTAG: " + hashtag.value);
+
+    if (images.length > 0) {
+      console.log("TEMPLATE IS: " + typeof template);
+      console.log("images is: " + typeof images);
+      console.log(images);
+      console.log("images[0] is: " + typeof images[0]);
+      // Delete existing images from DOM
+      for (var i = 0; i < images.length; i++) {
+        console.log("images[i] is: " + typeof images[i]);
+        template.removeChild(images[i]);
+      }
+    }
 
     // execute JSONP API call with hashtag
     var $jsonp = (function () {
