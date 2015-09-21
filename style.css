@@ -61,7 +61,7 @@ p {
   display: none;
   position: fixed;
   top: 20%;
-  left: 32.5%;
+  left: 34%;
   width: 30%;
   height: 60%;
   padding: 16px;
@@ -106,4 +106,43 @@ p {
   border: 2px solid grey;
   border-radius: 100%;
   background-color: white;
+}
+
+/* RESPONSIVE STYLES FOR LIGHTBOX */
+
+@media handheld, screen and (max-width: 1255px) {
+  .white_content {
+    width: 35%;
+    left: 31%;
+  }
+}
+
+@media handheld, screen and (max-width: 1076px) {
+  .white_content {
+    width: 40%;
+    left: 29%;
+  }
+}
+
+@media handheld, screen and (max-width: 938px) {
+  .white_content {
+    width: 45%;
+    left: 26.5%;
+  }
+}
+
+@media handheld, screen and (max-width: 885px) {
+  .white_content {
+    width: 50%;
+    left: 24%;
+  }
+}
+
+@media handheld, screen and (max-width: 767px) {
+  .white_content {
+    top: 10%;
+    left: 19%;
+    width: 60%;
+    height: 60%;
+  }
 }

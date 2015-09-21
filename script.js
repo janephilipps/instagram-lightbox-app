@@ -7,6 +7,7 @@ window.onload = function () {
   var images = template.childNodes;
 
 
+
   // Function to create templates for images returned from API call
   var showImages = function (data) {
     // Loop through array of images
@@ -133,7 +134,7 @@ window.onload = function () {
     event.preventDefault();
 
     // log hashtag value
-    // console.log(hashtag.value);
+    console.log(hashtag.value);
 
     // execute JSONP API call with hashtag
     var $jsonp = (function () {
