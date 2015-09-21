@@ -24,6 +24,10 @@ form {
   text-align: center;
 }
 
+/*.imageContainer {
+  width: 320px;
+}*/
+
 .image {
   margin-left: auto;
   margin-right: auto;

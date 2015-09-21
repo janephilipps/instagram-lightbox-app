@@ -1,7 +1,5 @@
 window.onload = function () {
 
-  // console.log("loaded!");
-
   var searchForm = document.getElementById("search");
   var hashtag = document.getElementById("hashtag");
   var template = document.getElementById("template");
@@ -9,20 +7,23 @@ window.onload = function () {
   var images = template.childNodes;
 
 
-  // Function to create a template for each image from API
+  // Function to create templates for images returned from API call
   var showImages = function (data) {
-    // console.log("Data", data);
+    // Loop through array of images
     for (var i = 0; i < data.length; i++) {
+      // Create new elements on the page
       var imageContainer = document.createElement("div");
       imageContainer.className = "imageContainer";
       var image = document.createElement("div");
       image.className = "image";
       var p = document.createElement("p");
       var img = document.createElement("img");
+      // Grab URL from API and assign to newly created img element
       img.src = data[i].images.low_resolution.url;
+      // Grab title from API and assign to newly created text node
       var text = document.createTextNode(data[i].caption.text);
       var hr = document.createElement("hr");
-      // console.log(text);
+      // Append all new elements to parent elements
       p.appendChild(text);
       image.appendChild(img);
       image.appendChild(p);
@@ -33,9 +34,8 @@ window.onload = function () {
     }
   };
 
-  // Function to add create lightbox
-
-  var addLightbox = function (index) {
+  // Function to show lightbox
+  var showLightbox = function (index) {
 
     var image = images[index];
     // console.log(image);
@@ -64,7 +64,7 @@ window.onload = function () {
         // Remove current lightbox
         removeLightbox(clone);
         // Add new lightbox for previous image
-        addLightbox(index - 1);
+        showLightbox(index - 1);
       });
     }
 
@@ -81,7 +81,7 @@ window.onload = function () {
         // Remove current lightbox
         removeLightbox(clone);
         // Add new lightbox for next image
-        addLightbox(index + 1);
+        showLightbox(index + 1);
       });
 
     }
@@ -115,13 +115,13 @@ window.onload = function () {
 
   // Function to listen for clicks to make lightbox pop up
   var listenForClicks = function () {
-
+    console.log(images);
     for (var i = 0; i < images.length; i++) {
 
       var addEventListener = function (index) {
-        images[i].addEventListener("click", function (event) {
+        images[i].firstChild.addEventListener("click", function (event) {
           // alert("This is image " + index);
-          addLightbox(index);
+          showLightbox(index);
         })
       }
       addEventListener(i);
