@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 
   // console.log("loaded!");
 
@@ -50,16 +50,42 @@ window.onload = function() {
     closeIcon.innerHTML = "X";
     // Append closeIcon to image clone
     clone.appendChild(closeIcon);
-    // Add left & right arrows
-    var left = document.createElement("div");
-    left.className = "left";
-    left.innerHTML = "<";
-    var right = document.createElement("div");
-    right.className = "right";
-    right.innerHTML = ">";
-    // Append left & right to image clone
-    clone.appendChild(left);
-    clone.appendChild(right);
+
+    if (index !== 0) {
+      // Add only left arrow
+      var left = document.createElement("div");
+      left.className = "left";
+      left.innerHTML = "<";
+      // Append left arrow to image clone
+      clone.appendChild(left);
+
+      // Add left arrow event listener to move to previous lightbox image
+      left.addEventListener("click", function (event) {
+        // Remove current lightbox
+        removeLightbox(clone);
+        // Add new lightbox for previous image
+        addLightbox(index - 1);
+      });
+    }
+
+    if (index !== 19) {
+      // Add only right arrow
+      var right = document.createElement("div");
+      right.className = "right";
+      right.innerHTML = ">";
+      // Append right arrow to image clone
+      clone.appendChild(right);
+
+      // Add right arrow event listener to move to next lightbox image
+      right.addEventListener("click", function (event) {
+        // Remove current lightbox
+        removeLightbox(clone);
+        // Add new lightbox for next image
+        addLightbox(index + 1);
+      });
+
+    }
+
     // Add the cloned image as a child of the document body
     document.body.appendChild(clone);
     // Add a new class to the clone
@@ -72,15 +98,22 @@ window.onload = function() {
     document.getElementById("light").style.display='block';
     document.getElementById("container").style.display='block';
 
+    // Add close icon event listener to remove lightbox image from DOM on click
     closeIcon.addEventListener("click", function (event) {
       // alert("hi!");
-      document.body.removeChild(clone);
-      container.className = "";
+      removeLightbox(clone);
     });
+
   };
 
-  // Function to listen for clicks to make lightbox pop up
+  // Function to remove lightbox
+  var removeLightbox = function (clone) {
+    console.log(typeof clone);
+    document.body.removeChild(clone);
+    container.className = "";
+  }
 
+  // Function to listen for clicks to make lightbox pop up
   var listenForClicks = function () {
 
     for (var i = 0; i < images.length; i++) {
@@ -91,42 +124,9 @@ window.onload = function() {
           addLightbox(index);
         })
       }
-
       addEventListener(i);
     }
   };
-
-    // Add lightbox functionality to first image
-    // var imageOne = images[0];
-
-    // imageOne.addEventListener("click", function (event) {
-    //   // alert("This is image 1!");
-    //   console.log(imageOne);
-    //   var clone = imageOne.cloneNode(true);
-    //   document.body.appendChild(clone);
-    //   clone.className = clone.className + " white_content";
-    //   container.className = "black_overlay";
-    //   clone.setAttribute("id", "light");
-    //   document.getElementById("light").style.display='block';
-    //   document.getElementById("container").style.display='block';
-
-    // })
-
-    // container.addEventListener("click", function (event) {
-    //   if (container.className === "black_overlay") {
-    //     console.log("lightbox in action!");
-    //     // remove clone
-    //     var clone = document.getElementById("light");
-    //     // document.body.removeChild(clone)
-
-    //     // remove black_overlay class from container
-    //     // container.className = "";
-
-    //   }
-    // })
-
-  // }
-
 
   searchForm.addEventListener("submit", function (event) {
     // prevent page from reloading
