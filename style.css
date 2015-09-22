@@ -13,7 +13,7 @@ input[type=submit] {
     border: 0;
     width: 120px;
     height:48px;
-    font-family: Futura;
+    font-family: Futura, sans-serif;
 }
 
 form {
@@ -23,10 +23,6 @@ form {
 #container {
   text-align: center;
 }
-
-/*.imageContainer {
-  width: 320px;
-}*/
 
 .image {
   margin-left: auto;
@@ -43,7 +39,7 @@ p {
 
 /* Lightbox CSS */
 
-.black_overlay {
+.overlay {
   display: none;
   position: absolute;
   top: 8px;

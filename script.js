@@ -1,5 +1,6 @@
 window.onload = function () {
 
+  // Define variables
   var searchForm = document.getElementById("search");
   var hashtag = document.getElementById("hashtag");
   var template = document.getElementById("template");
@@ -24,7 +25,7 @@ window.onload = function () {
       // Grab title from API and assign to newly created text node
       var text = document.createTextNode(data[i].caption.text);
       var hr = document.createElement("hr");
-      // Append all new elements to parent elements
+      // Append all new elements to template parent element
       p.appendChild(text);
       image.appendChild(img);
       image.appendChild(p);
@@ -32,6 +33,7 @@ window.onload = function () {
       imageContainer.appendChild(hr);
       template.appendChild(imageContainer);
 
+      // Set var images
       images = template.childNodes;
 
     }
@@ -41,28 +43,28 @@ window.onload = function () {
   var showLightbox = function (index) {
 
     var image = images[index];
-    // console.log(image);
     // Make a copy of the image that was clicked on
     var clone = image.cloneNode(true);
     // Remove hr from clone
     var hr = clone.lastChild;
     clone.removeChild(hr);
-    // Add X to clone
+    // Add close icon to clone
     var closeIcon = document.createElement("div");
     closeIcon.className = "closeIcon";
     closeIcon.innerHTML = "X";
-    // Append closeIcon to image clone
+    // Append close icon to image clone
     clone.appendChild(closeIcon);
 
+    // If image is not the first, add left arrow to toggle previous image
     if (index !== 0) {
-      // Add only left arrow
+      // Add left arrow
       var left = document.createElement("div");
       left.className = "left";
       left.innerHTML = "<";
       // Append left arrow to image clone
       clone.appendChild(left);
 
-      // Add left arrow event listener to move to previous lightbox image
+      // Add left arrow click listener
       left.addEventListener("click", function (event) {
         // Remove current lightbox
         removeLightbox(clone);
@@ -71,15 +73,16 @@ window.onload = function () {
       });
     }
 
+    // If image is not the last, add right arrow to toggle next image
     if (index !== 19) {
-      // Add only right arrow
+      // Add right arrow
       var right = document.createElement("div");
       right.className = "right";
       right.innerHTML = ">";
       // Append right arrow to image clone
       clone.appendChild(right);
 
-      // Add right arrow event listener to move to next lightbox image
+      // Add right arrow click listener
       right.addEventListener("click", function (event) {
         // Remove current lightbox
         removeLightbox(clone);
@@ -94,16 +97,15 @@ window.onload = function () {
     // Add a new class to the clone
     clone.className = clone.className + " white_content";
     // Add a new class to the container
-    container.className = "black_overlay";
+    container.className = "overlay";
     // Set the id of the clone
     clone.setAttribute("id", "light");
     // Change styles of clone and container elements to allow for lightbox
     document.getElementById("light").style.display='block';
     document.getElementById("container").style.display='block';
 
-    // Add close icon event listener to remove lightbox image from DOM on click
+    // Add close icon click listener to remove lightbox
     closeIcon.addEventListener("click", function (event) {
-      // alert("hi!");
       removeLightbox(clone);
     });
 
@@ -111,14 +113,14 @@ window.onload = function () {
 
   // Function to remove lightbox
   var removeLightbox = function (clone) {
-    console.log(typeof clone);
+    // Remove clone
     document.body.removeChild(clone);
+    // Reset container class
     container.className = "";
   }
 
   // Function to listen for clicks to make lightbox pop up
   var listenForClicks = function () {
-    // console.log(images[0].firstChild.lastChild.innerHTML);
     for (var i = 0; i < images.length; i++) {
 
       var addEventListener = function (index) {
@@ -135,16 +137,8 @@ window.onload = function () {
     // prevent page from reloading
     event.preventDefault();
 
-    // log hashtag value
-    console.log("HASHTAG: " + hashtag.value);
-
-
     // If there are images from a previous search, remove them
     if (images.length > 0) {
-      console.log("TEMPLATE IS: " + typeof template);
-      console.log("images is: " + typeof images);
-      console.log(images);
-      console.log("images[0] is: " + typeof images[0]);
       // Delete existing images from DOM
       while (template.firstChild) {
         template.removeChild(template.firstChild);
@@ -182,22 +176,21 @@ window.onload = function () {
       return that;
     })();
 
-  $jsonp.send("https://api.instagram.com/v1/tags/" + hashtag.value + "/media/recent?client_id=24a3a1bf127447d1aae07a6a7c4ef990&callback=callbackFunction", {
-      callbackName: "callbackFunction",
-      onSuccess: function (json) {
-        // console.log("success!", json);
-        showImages(json.data);
-        listenForClicks();
-      },
-      onTimeout: function () {
-        console.log("timeout!");
-      },
-      timeout: 5
-  });
+    // Call API
+    $jsonp.send("https://api.instagram.com/v1/tags/" + hashtag.value + "/media/recent?client_id=24a3a1bf127447d1aae07a6a7c4ef990&callback=callbackFunction", {
+        callbackName: "callbackFunction",
+        onSuccess: function (json) {
+          showImages(json.data);
+          listenForClicks();
+        },
+        onTimeout: function () {
+          console.log("timeout!");
+        },
+        timeout: 5
+    });
 
-  // reset form to be blank
-  hashtag.value = "";
-
+    // reset form to be blank
+    hashtag.value = "";
 
   });
 
