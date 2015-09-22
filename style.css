@@ -57,6 +57,19 @@ div.image p {
   margin-bottom: 8px;
 }
 
+div.image p a {
+  text-decoration: none;
+  color: royalblue;
+}
+
+div.image p a:hover {
+  color: orangered;
+}
+
+div.image p a:visited {
+  color: turquoise;
+}
+
 p {
   font-family: Helvetica, sans-serif;
   font-size: 16px;

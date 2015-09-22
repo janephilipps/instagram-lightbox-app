@@ -20,15 +20,13 @@ window.onload = function () {
       image.className = "image";
       var p1 = document.createElement("p");
       var p2 = document.createElement("p");
-      p1.innerHTML = "<b>photo by:</b> " + "<a href='http://instagram.com/" + data[i].caption.from.username + "' target='_blank'>" + data[i].caption.from.username + "</a>";
+      p1.innerHTML = "<b>photo by: " + "<a href='http://instagram.com/" + data[i].caption.from.username + "' target='_blank'>" + data[i].caption.from.username + "</a></b>";
       p2.innerHTML = "&hearts; " + data[i].likes.count;
       var p3 = document.createElement("p");
       var img = document.createElement("img");
       // Grab URL from API and assign to newly created img element
       img.src = data[i].images.low_resolution.url;
-      // Grab username, likes, and title from API and assign to newly created text nodes
-      // var username = document.createTextNode(data[i].caption.from.username);
-      // var likes = document.createTextNode(data[i].likes.count);
+      // Grab title from API and assign to newly created text nodes
       var title = document.createTextNode(data[i].caption.text);
       var hr = document.createElement("hr");
       // Append all new elements to template parent element
