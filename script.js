@@ -18,17 +18,27 @@ window.onload = function () {
       imageContainer.className = "imageContainer";
       var image = document.createElement("div");
       image.className = "image";
-      var p = document.createElement("p");
+      var p1 = document.createElement("p");
+      var p2 = document.createElement("p");
+      p1.innerHTML = "<b>photo by:</b> " + "<a href='http://instagram.com/" + data[i].caption.from.username + "' target='_blank'>" + data[i].caption.from.username + "</a>";
+      p2.innerHTML = "&hearts; " + data[i].likes.count;
+      var p3 = document.createElement("p");
       var img = document.createElement("img");
       // Grab URL from API and assign to newly created img element
       img.src = data[i].images.low_resolution.url;
-      // Grab title from API and assign to newly created text node
-      var text = document.createTextNode(data[i].caption.text);
+      // Grab username, likes, and title from API and assign to newly created text nodes
+      // var username = document.createTextNode(data[i].caption.from.username);
+      // var likes = document.createTextNode(data[i].likes.count);
+      var title = document.createTextNode(data[i].caption.text);
       var hr = document.createElement("hr");
       // Append all new elements to template parent element
-      p.appendChild(text);
+      // p1.appendChild(username);
+      // p1.appendChild(likes);
+      p3.appendChild(title);
       image.appendChild(img);
-      image.appendChild(p);
+      image.appendChild(p1);
+      image.appendChild(p2);
+      image.appendChild(p3);
       imageContainer.appendChild(image);
       imageContainer.appendChild(hr);
       template.appendChild(imageContainer);
@@ -124,7 +134,7 @@ window.onload = function () {
     for (var i = 0; i < images.length; i++) {
 
       var addEventListener = function (index) {
-        images[index].firstChild.addEventListener("click", function (event) {
+        images[index].firstChild.firstChild.addEventListener("click", function (event) {
           // alert("This is image " + index);
           showLightbox(index);
         })

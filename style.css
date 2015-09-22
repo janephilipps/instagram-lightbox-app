@@ -5,6 +5,10 @@ body {
   font-size: 2em;
 }
 
+body h2 {
+  text-align: center;
+}
+
 input {
   font-family: Futura, sans-serif;
   font-size: 32px;
@@ -36,12 +40,21 @@ div#instructions ol {
   text-align: left;
 }
 
+div#instructions h3 {
+  margin-bottom: 0;
+}
+
 .image {
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
   margin-bottom: 25px;
   width: 320px;
+}
+
+div.image p {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 p {
