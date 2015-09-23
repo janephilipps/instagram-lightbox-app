@@ -7,6 +7,19 @@ window.onload = function () {
   var container = document.getElementById("container");
   var images = template.childNodes;
 
+  var timeConverter = function (UNIX_timestamp) {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = month + ' ' + date + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+  }
+
 
 
   // Function to create templates for images returned from API call
@@ -18,11 +31,14 @@ window.onload = function () {
       imageContainer.className = "imageContainer";
       var image = document.createElement("div");
       image.className = "image";
+      // Create p elements to display username and likes
       var p1 = document.createElement("p");
       var p2 = document.createElement("p");
+      var p3 = document.createElement("p");
       p1.innerHTML = "<b>photo by: " + "<a href='http://instagram.com/" + data[i].caption.from.username + "' target='_blank'>" + data[i].caption.from.username + "</a></b>";
       p2.innerHTML = "&hearts; " + data[i].likes.count;
-      var p3 = document.createElement("p");
+      p3.innerHTML = timeConverter(data[i].created_time);
+      var p4 = document.createElement("p");
       var img = document.createElement("img");
       // Grab URL from API and assign to newly created img element
       img.src = data[i].images.low_resolution.url;
@@ -30,9 +46,7 @@ window.onload = function () {
       var title = document.createTextNode(data[i].caption.text);
       var hr = document.createElement("hr");
       // Append all new elements to template parent element
-      // p1.appendChild(username);
-      // p1.appendChild(likes);
-      p3.appendChild(title);
+      p4.appendChild(title);
       image.appendChild(img);
       image.appendChild(p1);
       image.appendChild(p2);
@@ -133,7 +147,6 @@ window.onload = function () {
 
       var addEventListener = function (index) {
         images[index].firstChild.firstChild.addEventListener("click", function (event) {
-          // alert("This is image " + index);
           showLightbox(index);
         })
       }
@@ -173,11 +186,13 @@ window.onload = function () {
           on_success(data);
         }
 
+        // Create script element on page to run API call
         var script = document.createElement("script");
         script.type = "text/javascript";
         script.async = true;
         script.src = src;
 
+        // Append script to head
         document.getElementsByTagName("head")[0].appendChild(script);
       }
 
