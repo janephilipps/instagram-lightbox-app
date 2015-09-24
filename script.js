@@ -16,8 +16,14 @@ window.onload = function () {
     var hour = a.getHours();
     var min = a.getMinutes();
     var sec = a.getSeconds();
-    var time = month + ' ' + date + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    var time = month + ' ' + date + ' ' + year + ' ' + padZero(hour, 2) + ':' + padZero(min, 2) + ':' + padZero(sec, 2) ;
     return time;
+  }
+
+  var padZero = function (n, p) {
+    var pad_char = '0';
+    var pad = new Array(1 + p).join(pad_char);
+    return (pad + n).slice(-pad.length);
   }
 
 
@@ -37,7 +43,7 @@ window.onload = function () {
       var p3 = document.createElement("p");
       p1.innerHTML = "<b>photo by: " + "<a href='http://instagram.com/" + data[i].caption.from.username + "' target='_blank'>" + data[i].caption.from.username + "</a></b>";
       p2.innerHTML = "&hearts; " + data[i].likes.count;
-      p3.innerHTML = timeConverter(data[i].created_time);
+      p3.innerHTML = "<b>posted:</b> <a href='" + data[i].link + "' target='_blank'>" + timeConverter(data[i].created_time) + "</a>";
       var p4 = document.createElement("p");
       var img = document.createElement("img");
       // Grab URL from API and assign to newly created img element
@@ -51,6 +57,7 @@ window.onload = function () {
       image.appendChild(p1);
       image.appendChild(p2);
       image.appendChild(p3);
+      image.appendChild(p4);
       imageContainer.appendChild(image);
       imageContainer.appendChild(hr);
       template.appendChild(imageContainer);
