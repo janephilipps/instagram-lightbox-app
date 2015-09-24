@@ -12,9 +12,9 @@ By [Jane Philipps](mailto:jane.philipps@gmail.com)
 
 ## Discussion
 
-The technologies I used to build this app are: JavaScript, HTML, and CSS. I chose to use the Instagram API for image data. Without constraints, I would have used:
+The technologies I used to build this app are: JavaScript, HTML, and CSS. I chose to use the Instagram API for image data. I used native Javascript to stay true to the spirit of the exercise, but in a production environment I would use:
 
-- Bootstrap for styling and responsiveness
-- jQuery or Angular (or some other front-end framework) for cleaner DOM manipulation, ease of templating, and pre-built JSONP functionality
+- [Bootstrap](http://getbootstrap.com/) for styling and responsiveness
+- [jQuery](https://jquery.com/) or [Angular](https://angularjs.org/) (or some other front-end framework) for cleaner DOM manipulation, ease of templating, and pre-built JSONP functionality
 
 I chose to use JSONP to access Instagram's API to solve for cross-origin issues. I took inspiration for the lightbox functionality from this helpful [blog post](https://www.script-tutorials.com/how-to-create-a-lightbox-ultra-using-css-and-javascript/).
