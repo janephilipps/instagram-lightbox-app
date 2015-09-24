@@ -7,16 +7,25 @@ window.onload = function () {
   var container = document.getElementById("container");
   var images = template.childNodes;
 
+
+  // Function to convert UNIX timestamp into readable date/time
   var timeConverter = function (UNIX_timestamp) {
     var a = new Date(UNIX_timestamp * 1000);
     var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     var year = a.getFullYear();
     var month = months[a.getMonth()];
     var date = a.getDate();
+    var amOrPm = "AM";
+    // Convert 24hour time to 12hour time & update amOrPm
     var hour = a.getHours();
+      if (hour > 12) {
+        hour -= 12;
+        amOrPm = "PM";
+      } else if (hour === 0) {
+        hour = 12;
+      }
     var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = month + ' ' + date + ', ' + year + ' ' + padZero(hour, 2) + ':' + padZero(min, 2) + ':' + padZero(sec, 2) ;
+    var time = month + ' ' + date + ', ' + year + ' ' + padZero(hour, 2) + ':' + padZero(min, 2) + ' ' + amOrPm;
     return time;
   }
 
