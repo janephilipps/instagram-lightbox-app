@@ -196,7 +196,8 @@ window.onload = function () {
       }
     }
 
-    // execute JSONP API call with hashtag
+    // Execute JSONP API call with hashtag
+    // Inspired by this stack overflow post: http://stackoverflow.com/a/13045312/4765678
     var jsonp = function (src, options) {
       var callbackName = options.callbackName,
         onSuccess = options.onSuccess,
