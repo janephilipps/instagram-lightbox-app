@@ -26,17 +26,17 @@ window.onload = function () {
     return (pad + n).slice(-pad.length);
   }
 
-
-
   // Function to create templates for images returned from API call
   var showImages = function (data) {
     // Loop through array of images
     for (var i = 0; i < data.length; i++) {
+
       // Create new elements on the page
       var imageContainer = document.createElement("div");
       imageContainer.className = "imageContainer";
       var image = document.createElement("div");
       image.className = "image";
+
       // Create p elements to display username and likes
       var p1 = document.createElement("p");
       var p2 = document.createElement("p");
@@ -46,11 +46,14 @@ window.onload = function () {
       p3.innerHTML = "<b>posted:</b> <a href='" + data[i].link + "' target='_blank'>" + timeConverter(data[i].created_time) + "</a>";
       var p4 = document.createElement("p");
       var img = document.createElement("img");
+
       // Grab URL from API and assign to newly created img element
       img.src = data[i].images.low_resolution.url;
+
       // Grab title from API and assign to newly created text nodes
       var title = document.createTextNode(data[i].caption.text);
       var hr = document.createElement("hr");
+
       // Append all new elements to template parent element
       p4.appendChild(title);
       image.appendChild(img);
@@ -72,31 +75,39 @@ window.onload = function () {
   var showLightbox = function (index) {
 
     var image = images[index];
+
     // Make a copy of the image that was clicked on
     var clone = image.cloneNode(true);
+
     // Remove hr from clone
     var hr = clone.lastChild;
     clone.removeChild(hr);
+
     // Add close icon to clone
     var closeIcon = document.createElement("div");
     closeIcon.className = "closeIcon";
     closeIcon.innerHTML = "X";
+
     // Append close icon to image clone
     clone.appendChild(closeIcon);
 
     // If image is not the first, add left arrow to toggle previous image
     if (index !== 0) {
+
       // Add left arrow
       var left = document.createElement("div");
       left.className = "left";
       left.innerHTML = "<";
+
       // Append left arrow to image clone
       clone.appendChild(left);
 
       // Add left arrow click listener
       left.addEventListener("click", function (event) {
+
         // Remove current lightbox
         removeLightbox(clone);
+
         // Add new lightbox for previous image
         showLightbox(index - 1);
       });
@@ -104,17 +115,21 @@ window.onload = function () {
 
     // If image is not the last, add right arrow to toggle next image
     if (index !== 19) {
+
       // Add right arrow
       var right = document.createElement("div");
       right.className = "right";
       right.innerHTML = ">";
+
       // Append right arrow to image clone
       clone.appendChild(right);
 
       // Add right arrow click listener
       right.addEventListener("click", function (event) {
+
         // Remove current lightbox
         removeLightbox(clone);
+
         // Add new lightbox for next image
         showLightbox(index + 1);
       });
@@ -123,12 +138,16 @@ window.onload = function () {
 
     // Add the cloned image as a child of the document body
     document.body.appendChild(clone);
+
     // Add a new class to the clone
     clone.className = clone.className + " white_content";
+
     // Add a new class to the container
     container.className = "overlay";
+
     // Set the id of the clone
     clone.setAttribute("id", "light");
+
     // Change styles of clone and container elements to allow for lightbox
     document.getElementById("light").style.display='block';
     document.getElementById("container").style.display='block';
@@ -142,8 +161,10 @@ window.onload = function () {
 
   // Function to remove lightbox
   var removeLightbox = function (clone) {
+
     // Remove clone
     document.body.removeChild(clone);
+
     // Reset container class
     container.className = "";
   }
@@ -162,11 +183,13 @@ window.onload = function () {
   };
 
   searchForm.addEventListener("submit", function (event) {
+
     // prevent page from reloading
     event.preventDefault();
 
     // If there are images from a previous search, remove them
     if (images.length > 0) {
+
       // Delete existing images from DOM
       while (template.firstChild) {
         template.removeChild(template.firstChild);
@@ -174,52 +197,51 @@ window.onload = function () {
     }
 
     // execute JSONP API call with hashtag
-    var $jsonp = (function () {
-      var that = {};
+    var jsonp = function (src, options) {
+      var callbackName = options.callbackName,
+        onSuccess = options.onSuccess,
+        onTimeout = options.onTimeout,
+        timeout = options.timeout;
 
-      that.send = function (src, options) {
-        var callback_name = options.callbackName || "callback",
-          on_success = options.onSuccess || function () {},
-          on_timeout = options.onTimeout || function () {},
-          timeout = options.timeout || 10; // sec
+      // Create timeout trigger that handles API not returning data
+      var timeoutTrigger = window.setTimeout(function () {
+        window[callbackName] = function () {};
+        onTimeout();
+      }, timeout * 1000);
 
-        var timeout_trigger = window.setTimeout(function () {
-          window[callback_name] = function () {};
-          on_timeout();
-        }, timeout * 1000);
-
-        window[callback_name] = function (data) {
-          window.clearTimeout(timeout_trigger);
-          on_success(data);
-        }
-
-        // Create script element on page to run API call
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.async = true;
-        script.src = src;
-
-        // Append script to head
-        document.getElementsByTagName("head")[0].appendChild(script);
+      // If API returns data, process data but do not run timeout trigger
+      window[callbackName] = function (data) {
+        window.clearTimeout(timeoutTrigger);
+        onSuccess(data);
       }
 
-      return that;
-    })();
+      // Create script element on page to run API call
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.async = true;
+      script.src = src;
+
+      // Append script to head
+      document.getElementsByTagName("head")[0].appendChild(script);
+    };
 
     // Call API
-    $jsonp.send("https://api.instagram.com/v1/tags/" + hashtag.value + "/media/recent?client_id=24a3a1bf127447d1aae07a6a7c4ef990&callback=callbackFunction", {
-        callbackName: "callbackFunction",
-        onSuccess: function (json) {
-          showImages(json.data);
-          listenForClicks();
-        },
-        onTimeout: function () {
-          console.log("timeout!");
-        },
-        timeout: 5
+    jsonp("https://api.instagram.com/v1/tags/" + hashtag.value + "/media/recent?client_id=24a3a1bf127447d1aae07a6a7c4ef990&callback=callbackFunction", {
+      callbackName: "callbackFunction",
+
+      // When API returns data, call showImages and listenForClicks
+      onSuccess: function (json) {
+        showImages(json.data);
+        listenForClicks();
+      },
+      // If API doesn't return in 5 secs, log timeout
+      onTimeout: function () {
+        console.log("timeout!");
+      },
+      timeout: 5 // sec
     });
 
-    // reset form to be blank
+    // Reset form to be blank
     hashtag.value = "";
 
   });
