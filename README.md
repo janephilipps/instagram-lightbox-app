@@ -12,7 +12,7 @@ By [Jane Philipps](mailto:jane.philipps@gmail.com)
 
 ## Discussion
 
-The technologies I used to build this app are: JavaScript, HTML, and CSS. I chose to use the Instagram API for image data. I used native Javascript to stay true to the spirit of the exercise, but in a production environment I would use:
+The technologies I used to build this app are: JavaScript, HTML, and CSS. I chose to use the Instagram API for image data. I used native Javascript to stay true to the spirit of the exercise, but in a production environment I might use:
 
 - [Bootstrap](http://getbootstrap.com/) for styling and responsiveness
 - [jQuery](https://jquery.com/) or [Angular](https://angularjs.org/) (or some other front-end framework) for cleaner DOM manipulation, ease of templating, and pre-built JSONP functionality
