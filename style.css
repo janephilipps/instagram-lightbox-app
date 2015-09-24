@@ -7,6 +7,7 @@ body {
 
 body h2 {
   text-align: center;
+  margin-bottom: 0;
 }
 
 input {
@@ -38,9 +39,11 @@ div#instructions ol {
   font-size: .75em;
   display: inline-block;
   text-align: left;
+  margin-top: 0;
 }
 
 div#instructions h3 {
+  margin-top: 10px;
   margin-bottom: 0;
 }
 
@@ -165,18 +168,94 @@ p {
   }
 }
 
-@media handheld, screen and (max-width: 885px) {
+@media handheld, screen and (min-width: 768) and (max-width: 885px) {
+  body h2 {
+    font-size: 1em;
+  }
+
+  div#instructions h3 {
+    font-size: .825em;
+  }
+
+  div#instructions ol {
+    font-size: .75em;
+  }
+
+  form#search {
+    font-size: .825em;
+  }
+
+  input {
+    font-size: .825em;
+  }
+
+  input[type=submit] {
+    height:31px;
+  }
+
   .white_content {
     width: 50%;
     left: 24%;
   }
 }
 
-@media handheld, screen and (max-width: 767px) {
+@media handheld, screen and (min-width: 401px) and (max-width: 767px) {
+  body h2 {
+    font-size: 1em;
+  }
+
+  div#instructions h3 {
+    font-size: .825em;
+  }
+
+  div#instructions ol {
+    font-size: .625em;
+    display: inline-block;
+    text-align: left;
+  }
+
+  form#search {
+    font-size: .75em;
+  }
+
+  input {
+    font-size: .75em;
+  }
+
+  input[type=submit] {
+    height:31px;
+  }
+
   .white_content {
     top: 10%;
     left: 19%;
     width: 60%;
     height: 60%;
+  }
+}
+
+@media handheld, screen and (max-width: 400px) {
+  body h2 {
+    font-size: .825em;
+  }
+
+  div#instructions h3 {
+    font-size: .75em;
+  }
+
+  div#instructions ol {
+    font-size: .5em;
+  }
+
+  form#search {
+    font-size: .75em;
+  }
+
+  input {
+    font-size: .75em;
+  }
+
+  input[type=submit] {
+    height:31px;
   }
 }

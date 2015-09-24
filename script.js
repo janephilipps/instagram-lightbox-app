@@ -65,6 +65,10 @@ window.onload = function () {
       imageContainer.appendChild(hr);
       template.appendChild(imageContainer);
 
+      // Remove hr from last image
+      console.log(template.lastChild);
+      // template.lastChild.removeChild(hr);
+
       // Set var images
       images = template.childNodes;
 
@@ -111,6 +115,17 @@ window.onload = function () {
         // Add new lightbox for previous image
         showLightbox(index - 1);
       });
+
+      // var key = event.keydown;
+      // console.log(key);
+
+      if (event.keycode === 37) {
+        // Remove current lightbox
+        removeLightbox(clone);
+
+        // Add new lightbox for previous image
+        showLightbox(index - 1);
+      }
     }
 
     // If image is not the last, add right arrow to toggle next image
