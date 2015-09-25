@@ -94,9 +94,12 @@ window.onload = function () {
     // Make a copy of the image that was clicked on
     var clone = image.cloneNode(true);
 
-    // Remove hr from clone
-    var hr = clone.lastChild;
-    clone.removeChild(hr);
+    if (index < 19) {
+      // Remove hr from clone
+      var hr = clone.lastChild;
+      clone.removeChild(hr);
+    }
+    
 
     // Add close icon to clone
     var closeIcon = document.createElement("div");
