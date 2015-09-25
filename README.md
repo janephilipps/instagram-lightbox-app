@@ -6,7 +6,7 @@ By [Jane Philipps](mailto:jane.philipps@gmail.com)
 
 ## Instructions
 
-1. Navigate to [app](http://janephilipps.github.io/instagram_lightbox_app.html)
+1. Navigate to [app](http://janephilipps.github.io/lightbox/)
 2. Follow instructions on page
 3. Enjoy!
 
