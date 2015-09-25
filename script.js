@@ -124,9 +124,6 @@ window.onload = function () {
         showLightbox(index - 1);
       });
 
-      // Check for key presses
-      document.onkeydown = checkKey;
-
     }
 
     // If image is not the last, add right arrow to toggle next image
@@ -149,9 +146,6 @@ window.onload = function () {
         // Add new lightbox for next image
         showLightbox(index + 1);
       });
-
-      // Check for key presses
-      document.onkeydown = checkKey;
 
     }
 
@@ -177,9 +171,13 @@ window.onload = function () {
     });
 
     // Function to check for arrow & esc key presses
-    function checkKey(e) {
+    var checkKey = function (e) {
 
+      // For IE
       e = e || window.event;
+
+      // Prevents horizontal scrolling
+      e.preventDefault();
 
       if (index === 0) {
 
@@ -227,6 +225,9 @@ window.onload = function () {
       }
     }
 
+    // Check for key presses
+    document.onkeydown = checkKey;
+
   };
 
   // Function to remove lightbox
@@ -237,6 +238,9 @@ window.onload = function () {
 
     // Reset container class
     container.className = "";
+
+    // Reset onkeydown to null
+    document.onkeydown = null;
   }
 
   // Function to listen for clicks to make lightbox pop up
