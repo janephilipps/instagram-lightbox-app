@@ -19,4 +19,4 @@ The technologies I used to build this app are: JavaScript, HTML, and CSS. I chos
 
 I chose to use JSONP to access Instagram's API to solve for cross-origin issues. I took inspiration for the lightbox functionality from this helpful [blog post](https://www.script-tutorials.com/how-to-create-a-lightbox-ultra-using-css-and-javascript/).
 
-The app is fully responsive.
+The app has been tested in the latest versions of Chrome, Firefox, Safari and Internet Explorer (using VirtualBox).
