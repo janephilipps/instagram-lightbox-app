@@ -124,6 +124,7 @@ window.onload = function () {
         showLightbox(index - 1);
       });
 
+      // Check for key presses
       document.onkeydown = checkKey;
 
     }
@@ -149,6 +150,7 @@ window.onload = function () {
         showLightbox(index + 1);
       });
 
+      // Check for key presses
       document.onkeydown = checkKey;
 
     }
@@ -174,29 +176,54 @@ window.onload = function () {
       removeLightbox(clone);
     });
 
-    // document.onkeydown = checkKey;
-
+    // Function to check for arrow & esc key presses
     function checkKey(e) {
 
       e = e || window.event;
 
-      if (e.keyCode == '27') {
-        // console.log("esc!");
-        removeLightbox(clone);
+      if (index === 0) {
 
-      } else if (e.keyCode == '37') {
-        console.log("left!");
-        // Remove current lightbox
-        removeLightbox(clone);
-        // Add new lightbox for previous image
-        showLightbox(index - 1);
+        // ESC key
+        if (e.keyCode == '27') {
+          removeLightbox(clone);
+        // RIGHT arrow
+        } else if (e.keyCode == '39') {
+          // Remove current lightbox
+          removeLightbox(clone);
+          // Add new lightbox for next image
+          showLightbox(index + 1);
+        }
+      } else if (index === 19) {
+        // ESC key
+        if (e.keyCode == '27') {
+          removeLightbox(clone);
+        // LEFT arrow
+        } else if (e.keyCode == '37') {
+          // Remove current lightbox
+          removeLightbox(clone);
+          // Add new lightbox for previous image
+          showLightbox(index - 1);
 
-      } else if (e.keyCode == '39') {
-        console.log("right!");
-        // Remove current lightbox
-        removeLightbox(clone);
-        // Add new lightbox for next image
-        showLightbox(index + 1);
+        }
+      } else {
+        // ESC key
+        if (e.keyCode == '27') {
+          removeLightbox(clone);
+
+        // LEFT arrow
+        } else if (e.keyCode == '37') {
+          // Remove current lightbox
+          removeLightbox(clone);
+          // Add new lightbox for previous image
+          showLightbox(index - 1);
+
+        // RIGHT arrow
+        } else if (e.keyCode == '39') {
+          // Remove current lightbox
+          removeLightbox(clone);
+          // Add new lightbox for next image
+          showLightbox(index + 1);
+        }
       }
     }
 
