@@ -24,7 +24,7 @@ window.onload = function () {
         hour = 12;
       }
     var min = a.getMinutes();
-    var time = month + ' ' + date + ', ' + year + ' ' + padZero(hour, 2) + ':' + padZero(min, 2) + ' ' + amOrPm;
+    var time = month + ' ' + date + ', ' + year + ' ' + hour + ':' + padZero(min, 2) + ' ' + amOrPm;
     return time;
   }
 
