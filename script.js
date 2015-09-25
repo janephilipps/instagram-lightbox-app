@@ -176,53 +176,36 @@ window.onload = function () {
       // For IE
       e = e || window.event;
 
-      // Prevents horizontal scrolling
-      e.preventDefault();
-
-      if (index === 0) {
-
-        // ESC key
-        if (e.keyCode == '27') {
-          removeLightbox(clone);
-        // RIGHT arrow
-        } else if (e.keyCode == '39') {
-          // Remove current lightbox
-          removeLightbox(clone);
-          // Add new lightbox for next image
-          showLightbox(index + 1);
-        }
-      } else if (index === 19) {
-        // ESC key
-        if (e.keyCode == '27') {
-          removeLightbox(clone);
-        // LEFT arrow
-        } else if (e.keyCode == '37') {
-          // Remove current lightbox
-          removeLightbox(clone);
-          // Add new lightbox for previous image
-          showLightbox(index - 1);
-
-        }
-      } else {
-        // ESC key
-        if (e.keyCode == '27') {
-          removeLightbox(clone);
-
-        // LEFT arrow
-        } else if (e.keyCode == '37') {
-          // Remove current lightbox
-          removeLightbox(clone);
-          // Add new lightbox for previous image
-          showLightbox(index - 1);
-
-        // RIGHT arrow
-        } else if (e.keyCode == '39') {
+      // RIGHT arrow
+      if (e.keyCode == '39') {
+        // Prevent horizontal scrolling
+        e.preventDefault();
+        if (index !== 19) {
           // Remove current lightbox
           removeLightbox(clone);
           // Add new lightbox for next image
           showLightbox(index + 1);
         }
       }
+
+      // LEFT arrow
+      if (e.keyCode == '37') {
+        // Prevent horizontal scrolling
+        e.preventDefault();
+        if (index !== 0) {
+          // Remove current lightbox
+          removeLightbox(clone);
+          // Add new lightbox for previous image
+          showLightbox(index - 1);
+
+        }
+      }
+
+      // ESC key
+      if (e.keyCode == '27') {
+        removeLightbox(clone);
+      }
+
     }
 
     // Check for key presses
