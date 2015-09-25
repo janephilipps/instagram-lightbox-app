@@ -194,7 +194,7 @@ p {
   }
 
   .white_content {
-    width: 50%;
+    width: 55%;
     left: 24%;
   }
 }
@@ -228,8 +228,8 @@ p {
 
   .white_content {
     top: 10%;
-    left: 19%;
-    width: 60%;
+    left: 15%;
+    width: 70%;
     height: 60%;
   }
 }
@@ -257,5 +257,12 @@ p {
 
   input[type=submit] {
     height:31px;
+  }
+
+  .white_content {
+    top: 10%;
+    left: 5%;
+    width: 80%;
+    height: 60%;
   }
 }
