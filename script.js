@@ -7,7 +7,6 @@ window.onload = function () {
   var container = document.getElementById("container");
   var images = template.childNodes;
 
-
   // Function to convert UNIX timestamp into readable date/time
   var timeConverter = function (UNIX_timestamp) {
     var a = new Date(UNIX_timestamp * 1000);
@@ -75,7 +74,7 @@ window.onload = function () {
       template.appendChild(imageContainer);
 
       // Remove hr from last image
-      console.log(template.lastChild);
+      // console.log(template.lastChild);
       // template.lastChild.removeChild(hr);
 
       // Set var images
@@ -125,16 +124,8 @@ window.onload = function () {
         showLightbox(index - 1);
       });
 
-      // var key = event.keydown;
-      // console.log(key);
+      document.onkeydown = checkKey;
 
-      if (event.keycode === 37) {
-        // Remove current lightbox
-        removeLightbox(clone);
-
-        // Add new lightbox for previous image
-        showLightbox(index - 1);
-      }
     }
 
     // If image is not the last, add right arrow to toggle next image
@@ -158,6 +149,8 @@ window.onload = function () {
         showLightbox(index + 1);
       });
 
+      document.onkeydown = checkKey;
+
     }
 
     // Add the cloned image as a child of the document body
@@ -180,6 +173,32 @@ window.onload = function () {
     closeIcon.addEventListener("click", function (event) {
       removeLightbox(clone);
     });
+
+    // document.onkeydown = checkKey;
+
+    function checkKey(e) {
+
+      e = e || window.event;
+
+      if (e.keyCode == '27') {
+        // console.log("esc!");
+        removeLightbox(clone);
+
+      } else if (e.keyCode == '37') {
+        console.log("left!");
+        // Remove current lightbox
+        removeLightbox(clone);
+        // Add new lightbox for previous image
+        showLightbox(index - 1);
+
+      } else if (e.keyCode == '39') {
+        console.log("right!");
+        // Remove current lightbox
+        removeLightbox(clone);
+        // Add new lightbox for next image
+        showLightbox(index + 1);
+      }
+    }
 
   };
 
