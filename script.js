@@ -60,7 +60,6 @@ window.onload = function () {
 
       // Grab title from API and assign to newly created text nodes
       var title = document.createTextNode(data[i].caption.text);
-      var hr = document.createElement("hr");
 
       // Append all new elements to template parent element
       p4.appendChild(title);
@@ -70,12 +69,12 @@ window.onload = function () {
       image.appendChild(p3);
       image.appendChild(p4);
       imageContainer.appendChild(image);
-      imageContainer.appendChild(hr);
+      // Add hr for all images except last one
+      if (i < 19) {
+        var hr = document.createElement("hr");
+        imageContainer.appendChild(hr);
+      }
       template.appendChild(imageContainer);
-
-      // Remove hr from last image
-      // console.log(template.lastChild);
-      // template.lastChild.removeChild(hr);
 
       // Set var images
       images = template.childNodes;
@@ -85,6 +84,10 @@ window.onload = function () {
 
   // Function to show lightbox
   var showLightbox = function (index) {
+
+    if (document.getElementById("light")) {
+      return;
+    }
 
     var image = images[index];
 
